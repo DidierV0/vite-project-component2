@@ -1,50 +1,50 @@
-import React, { useState }  from 'react'
+import React from "react";
+import { useDispatch } from "react-redux";
+import { addStagiaire,editStagiaire,deleteStagiaire } from "../redux";
 
 const FormInput = () => {
 
-    const [myText, setMyText] = useState('');
-    const [myNote, setMyNote] = useState(0);
+  const dispatch = useDispatch();
 
-    const send = () => { 
+  const handleSubmit = (event) => {
+    event.preventDefault() 
+    const {prenom, note} = event.target ;
+    // console.log('prenom', prenom.value , 'note', note.value)
 
-       setMyText('') ;  
-     }
+    const infostagiaire = {
+                          id : Date.now(),
+                          prenom : prenom.value,
+                          note: Number(note.value)}
+    dispatch(addStagiaire(infostagiaire)); 
+   }
 
-  /*  const handlerChange = (event) => {
-        // event.target.value
-        setMyText(event.target.value) ;
-        console.log('event change' , event.target.value ) ; 
-
-    }*/
   return (
-
     <div className="navbar bg-base-100">
-  <div className="navbar-start">
-  <input type="text" placeholder="Note du stagiaire"
-      
-       value={myNote}
-      
-      className="input input-bordered w-24 md:w-auto" />
-  </div>
-  <div className="navbar-center">
-    <div className="form-control">
-      <input type="text" placeholder="Ajouter un Stagiaire"
- 
-       value={myText}
-      
-      className="input input-bordered w-24 md:w-auto" />
-    
+      <form onSubmit={handleSubmit}>
+        <div className="navbar-start">
+          <input
+            name="note"
+            type="text"
+            placeholder="Note du stagiaire"
+            className="input input-bordered w-24 md:w-auto"
+          />
+        </div>
+        <div className="navbar-center">
+          <div className="form-control">
+            <input
+            name="prenom"
+              type="text"
+              placeholder="Ajouter un Stagiaire"
+              className="input input-bordered w-24 md:w-auto"
+            />
+          </div>
+        </div>
+        <div className="navbar-end">
+          <button type="submit" className="btn">Ajouter</button>
+        </div>
+      </form>
     </div>
- 
-  </div>
-  <div className="navbar-end">
-  
-  <button className='btn' onClick={send}>Ajouter</button>
-  </div>
-</div>
-    
-   
-  )
-}
+  );
+};
 
-export default FormInput
+export default FormInput;

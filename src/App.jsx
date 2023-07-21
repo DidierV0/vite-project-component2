@@ -8,6 +8,8 @@ import FormInput from './common/FormInput'
 
 import ListItem from './common/ListItem' ;
 
+import Button from './common/Button';
+
 
 function App() {
 
@@ -15,8 +17,9 @@ function App() {
   return (
     <Provider store={store}>
       <div className='App'>
-        <AfficheCompteur/>
-        <FormInput /> 
+        {/* <AfficheCompteur/>
+        <Button/> */}
+        <FormInput />
         <ListItem />
       </div>
     </Provider>
